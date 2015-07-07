@@ -1,0 +1,473 @@
+<!--
+Google IO 2012/2013 HTML5 Slide Template
+
+Authors: Eric Bidelman <ebidel@gmail.com>
+         Luke Mahé <lukem@google.com>
+
+URL: https://code.google.com/p/io-2012-slides
+-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+  <!--This one seems to work all the time, but really small on ipad-->
+  <!--<meta name="viewport" content="initial-scale=0.4">-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <link rel="stylesheet" media="all" href="theme/css/default.css">
+  <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="theme/css/phone.css">
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->
+  <script data-main="js/slides" src="js/require-1.0.8.min.js"></script>
+</head>
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <!-- <slide class="logoslide nobackground">
+    <article class="flexbox vcenter">
+      <span><img src="images/google_developers_logo.png"></span>
+    </article>
+  </slide> -->
+
+  <slide class="fill nobackground" style="background-image: url(images/portada.png)">
+  </slide>
+
+  <slide class="title-slide segue blue">
+    <aside class="gdbar"></aside>
+    <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+    </hgroup>
+  </slide>
+
+  <slide class="fill nobackground" style="background-image: url(images/team.png)">
+    <hgroup>
+      <h2 style="color:white">The team</h2>
+    </hgroup>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>A challenge</h1>
+      <h2>Contacts to NGA</h2>
+    </article>
+  </slide>
+
+  <slide class="blue">
+    <article class="flexbox vcenter">
+      <h1>How?</h1>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Learn by doing</h1>
+    </article>
+  </slide>
+
+  <slide class="blue">
+    <article class="flexbox vcenter">
+      <h1>Lean development</h1>
+    </article>
+  </slide>
+
+  <slide class="fill nobackground" style="background-image: url(images/lean_cycle_1_1.png)">
+    <hgroup>
+      <h2 style="color:white">Lean cycle</h2>
+    </hgroup>
+  </slide>
+
+
+  <!-- <slide class="fill nobackground" style="background-image: url(images/lean_cycle_2_2.png)">
+    <hgroup>
+      <h2  style="color:white">Build a prototype</h2>
+    </hgroup>
+  </slide>
+
+  <slide class="blue">
+    <article class="flexbox vcenter">
+     <iframe style="height: 560px !important; width: 315px !important;" width="420" height="315" src="https://www.youtube.com/embed/GNbi-LexCHs" frameborder="0" allowfullscreen></iframe>
+    </article>
+  </slide> -->
+
+  <!-- <slide class="blue">
+    <article class="flexbox vcenter">
+      <h1>How to measure?</h1>
+      <h2>Raptor & Marionette</h2>
+    </article>
+  </slide>
+
+  <slide class="blue">
+    <article class="flexbox vcenter">
+      <h1>How to navigate?</h1>
+      <h2>ContentWrapper vs Selfcontained</h2>
+    </article>
+  </slide>
+
+  <slide class="blue">
+    <article class="flexbox vcenter">
+      <h1>How to split in views?</h1>
+      <h2>Review the Contacts App code</h2>
+    </article>
+  </slide>
+
+  <slide class="blue">
+    <article class="flexbox vcenter">
+      <h1>Tech. debt</h1>
+      <h2>Remove dependencies and improve the code!</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Contacts namespace issue</h2>
+    </hgroup>
+    <article>
+      <p>Namespace is a problem. Every part of the code is tied to contacts.js</p>
+      <pre class="prettyprint" data-lang="javascript">
+&lt;script type='text/javascript'&gt;
+// This code is a snippet from contacts.js
+var setCurrent = function c_setCurrent(contact) {
+  currentContact = contact;
+  if ('mozNfc' in navigator && contacts.NFC) {
+    <b>contacts.NFC.startListening(contact);</b>
+  }
+
+  if (contacts.Details) {
+    <b>contacts.Details.setContact(contact);</b>
+  }
+};
+&lt;/script&gt;
+</pre>
+    </article>
+  </slide>
+
+  <slide>
+    <hgroup>
+      <h2>Facebook code is everywhere</h2>
+    </hgroup>
+    <article>
+      <p>It's in JS and DOM :S</p>
+      <pre class="prettyprint" data-lang="javascript">
+&lt;script type='text/javascript'&gt;
+<b>if (fb.isFbContact(contact)) {
+  if (!fb.isFbLinked(contact)) {
+    var fbContact = new fb.Contact(contact);</b>
+    //...
+  }
+  // ...
+  var getPhones = function getPhones(contact) {
+    <b>var selector = '#view-contact-form form div.phone-template:not(.facebook)';</b>
+    var phones = dom.querySelectorAll(selector);
+    // ...
+  };
+}
+
+<b>// And is in the HTML as well! :S</b>
+&lt;/script&gt;
+</pre>
+    </article>
+  </slide> -->
+
+  <slide class="blue">
+    <article class="flexbox vcenter">
+      <h1>Proposal:</h1><br>
+      <h2>Separate by activities</h2>
+    </article>
+  </slide>
+
+  <slide class="blue">
+    <article class="flexbox vcenter">
+      <h1>1st cycle:</h1><br>
+      <h2>Separate <b>#new</b> and <b>#open</b> activities.</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h2>Merge <b>#new & #open</b> in master.</h2>
+      <h2><b>Remove FB</b> entry points.</h2>
+      <h2>First draft of <b>Navigation.</b></h2>
+      <h2>Whistler <a href="http://borjasalguero.github.io/slides/whistler"><b>demo</b></a></h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Resultados</h1>
+      <h2>...</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Decisions taken</h1>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Import vs Open</h1><br>
+      <h2>Merge both activities</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Propuesta de Fernando</h1>
+      <h2>...</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Matcher</h1><br>
+      <h2>Need to remove hash changes</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Navigation</h1><br>
+      <h2>Need to merge in /shared. Use in #new</h2>
+    </article>
+  </slide>
+
+  <!-- <slide class="blue">
+    <article class="flexbox vcenter">
+     <iframe style="width: 760px !important; height: 515px !important;" width="560" height="315" src="https://www.youtube.com/embed/xASNmT8F4PA" frameborder="0" allowfullscreen></iframe>
+    </article>
+  </slide> -->
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>2nd cycle:</h1><br>
+      <h2>Integrate <b>#new</b> within the app. <b>#update</b> activity. </h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h2><b>#new</b> using <b>navigation.</b></h2>
+      <h2><b>FB code</b> removed from Detail&Form.</h2>
+      <h2><b>#update</b> merged in master.</h2>
+      <h2>First draft of <b>#open/import.</b></h2>
+      <h2></h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Resultados</h1>
+      <h2>...</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Decisions taken</h1>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>...</h1>
+      <h2>...</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>3rd cycle:</h1><br>
+      <h2>Integrate <b>#open</b> within the app. <b>#open/import</b> activity. </h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h2><b>#open</b> combined with <b>#update</b>.</h2>
+      <h2><b>#open</b> complete within the app</b>.</h2>
+      <h2>Draft of <b>settings</b> view.</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Resultados</h1>
+      <h2>...</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Decisions taken</h1>
+    </article>
+  </slide>
+
+   <slide>
+    <article class="flexbox vcenter">
+      <h1>...</h1>
+      <h2>...</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>4th cycle:</h1><br>
+      <h2>Full integration.</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h2><b>#settings</b> as self-contained view.</h2>
+      <h2>All views using navigation.</h2>
+      <h2>List must be isolated (for free!).</h2>
+      <h2><b>#list</b> draft as self-contained view.</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Resultados</h1>
+      <h2>...</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Decisions taken</h1>
+    </article>
+  </slide>
+
+   <slide>
+    <article class="flexbox vcenter">
+      <h1>...</h1>
+      <h2>...</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>5th cycle:</h1><br>
+      <h2>NGA stress test.</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h2>All views are self-contained.</h2>
+      <h2>FB has dissapeared from contacts.</h2>
+      <h2>Move /contacts out of /communications.</h2>
+      <h2>Remove tab from Dialer.</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Resultados</h1>
+      <h2>...</h2>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Decisions taken</h1>
+    </article>
+  </slide>
+
+   <slide>
+    <article class="flexbox vcenter">
+      <h1>...</h1>
+      <h2>...</h2>
+    </article>
+  </slide>
+
+
+  <!-- <slide class="blue">
+    <article class="flexbox vcenter">
+     <iframe style="width: 760px !important; height: 515px !important;" width="560" height="315" src="https://www.youtube.com/embed/EPv_zf2V_ec" frameborder="0" allowfullscreen></iframe>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>Next steps:</h1>
+      <h2>Do the same with <b>#update</b> and <b>#import</b></h2>
+    </article>
+  </slide>
+
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>How are we working?</h1>
+    </article>
+  </slide>
+
+  <slide>
+    <article class="flexbox vcenter">
+      <h1>2 weeks sprint</h1>
+    </article>
+  </slide>
+
+  <slide class="fill nobackground" style="background-image: url(images/chart_bugzilla.png)">
+    <hgroup>
+      <h2 style="color:white">[META] Bug 1168886 </h2>
+    </hgroup>
+  </slide>
+
+   <slide>
+    <article class="flexbox vcenter">
+      <h2 style="text-align:center;">https://wiki.mozilla.org/Gaia/New-Architecture-Program/Contacts</h2>
+    </article>
+  </slide> -->
+
+  <slide class="blue">
+    <article class="flexbox vcenter">
+      <h1>Everything must be an URL</h1>
+      <h2>"Pin the web" will work for free! :)</h2>
+    </article>
+  </slide>
+
+  <slide class="blue">
+    <hgroup>
+      <h2 style="color:white">Pin the web</h2>
+    </hgroup>
+     <article class="flexbox vcenter">
+     <iframe style="width: 360px !important; height: 555px !important;" width="560" height="315" src="https://www.youtube.com/embed/uHwFMpw8JW8" frameborder="0" allowfullscreen></iframe>
+    </article>
+  </slide>
+
+  <slide class="fill nobackground" style="background-image: url(images/map.png)">
+  </slide>
+
+  <slide class="fill nobackground" style="background-image: url(images/final.png)">
+  </slide>
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<script>
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-XXXXXXXX-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+  var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+  ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+  var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+<!--[if IE]>
+  <script src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script>CFInstall.check({mode: 'overlay'});</script>
+<![endif]-->
+</body>
+</html>
