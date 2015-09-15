@@ -1,0 +1,282 @@
+body, html {
+  width: 100%;
+  height: 100%;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: -moz-linear-gradient(top, rgba(0,147,221,1) 0%, rgba(0,82,159,1) 100%) no-repeat;
+}
+
+
+.panel {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.current {
+  /*background: pink;*/
+  display: block;
+}
+
+.card-image {
+  height: 200px;
+}
+
+
+/* VIDEO */
+
+.video-name {
+  position: absolute;
+  
+  bottom: 60px;
+  height: 105px;
+  line-height: 5rem;
+  box-sizing: border-box;
+  padding-top: 30px;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  font-size: 30px;
+  color: white;
+  background: rgba(0,0,0,.3);
+  font-weight: 300;
+}
+
+.video-status {
+  position: absolute;
+  bottom: 135px;
+  height: 30px;
+  line-height: 30px;
+  width: 100%;
+  text-align: center;
+  z-index: 100;
+  font-size: 20px;
+  color: white;
+  background: rgba(0,0,0,.8);
+  font-weight: 300;
+  opacity: 1;
+}
+
+@-webkit-keyframes status-animation {
+  0%   { opacity: 1; }
+  50% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.video-status.animate {
+  -webkit-animation: status-animation 3s infinite; /* Safari 4+ */
+  -moz-animation:    status-animation 3s infinite; /* Fx 5+ */
+  animation:         status-animation 3s infinite; /* IE 10+, Fx 29+ */
+}
+
+.video-fullscreen {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: url(img/yo.jpg);
+  /*background-color: #2B803E;
+  background-blend-mode: multiply;*/
+  background-size: auto 100%;
+  background-position: center;
+}
+
+#video-fullscreen-fs {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.video-fullscreen.connecting {
+   -webkit-filter: blur(10px);
+}
+
+.video-mini {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  /*border-radius: 6rem;*/
+  top: 0;
+  right: 0;
+  background: none;
+  /*border: 8px solid white;*/
+  background-image: url(img/yo_2.jpg);
+  background-size:  100% auto;
+  background-position: center;
+  overflow: hidden !important;
+}
+
+#video-opentok {
+  width: 12rem;
+  height: 12rem;
+  /*background: #1c5e6f;*/
+  position: relative;
+  z-index: 1000;
+}
+
+#video-opentok *,
+#video-opentok-fs * {
+  display: none;
+}
+
+#video-opentok .OT_widget-container,
+#video-opentok-fs .OT_widget-container {
+  background-color: none !important;
+  display: block;
+}
+/*#video-opentok .OT_widget-container {
+  margin-left: -15%;
+}*/
+
+#video-opentok video,
+#video-opentok-fs video {
+  display: block;
+}
+
+#hangup {
+  position: absolute;
+  width: 100%;
+  background-color: red;
+   background-image: url(img/hangup.png);
+  background-repeat: no-repeat;
+  background-position: center 11px;
+  border: none;
+  height: 60px;
+  bottom: 0;
+}
+
+
+/*********/
+
+h1 {
+  text-align: center;
+  font-size: 4rem;
+}
+
+body.scanning #messages-dongle {
+  display: none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+button {
+  transition: transform 0.1s;
+}
+
+button:active{
+  transform: scale(0.9);
+}
+
+p#messages-dongle {
+  box-sizing: border-box;
+  width: 20rem;
+  line-height: 20rem;
+  font-size: 2.5rem;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  border: medium none;
+  height: 20rem;
+  box-shadow: 0 1.1rem 0.9rem 0 rgba(50, 50, 50, 0.6);
+  background-color: #eee;
+  text-align: center;
+  transition: background-color 1s;
+}
+
+p#messages-dongle[color="green"] {
+  background-color: #59E186;
+  color: #fff;
+}
+
+p#messages-dongle[color="dark-green"] {
+  background-color: #4B780A;
+  color: white;
+}
+
+p#messages-dongle[color="red"] {
+  background-color: #FF5959;
+  color: #fff;
+}
+
+p#messages-dongle[loading] {
+  background-image: url(img/loading.gif);
+  background-position: center center;
+  background-size: 20rem;
+  background-repeat: no-repeat;
+}
+
+.brand {
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  font-size: 2rem;
+}
+
+.brand span {
+  font-weight: 400;
+  font-size: 2rem;
+}
+
+#pairing-panel {
+  border-radius: 50%;
+  width: 24rem;
+  height: 24rem;
+  overflow: hidden;
+}
+
+#pairing-panel video {
+  width: 25rem;
+}
+
+#pairing-panel canvas,
+#pairing-panel p {
+  opacity: 0;
+  position: absolute;
+}
+
+#cancel-share, #delete-button {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.85);
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: #333;
+  border: none;
+  font-size: 2rem;
+  line-height: 4rem;
+  text-align: center;
+}
+
+#delete-button {
+  right: 6rem;
+  background: url("img/remove.svg") no-repeat scroll center center / 2rem auto rgba(255, 255, 255, 0.85);
+}
+
+#cancel-share {
+  background: url("img/close.svg") no-repeat scroll center center / 2rem auto rgba(255, 255, 255, 0.85);
+}
+
+#messages {
+  position: absolute;
+  left: 0;
+  bottom: 0.5rem;
+  width: 100%;
+  text-align: center;
+}

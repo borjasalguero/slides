@@ -1,0 +1,57 @@
+{
+  "name": "FoxCastRemote",
+  "description": "FoxCast Remote",
+  "launch_path": "/index.html",
+  "type": "privileged",
+  "developer": {
+    "name": "The FoxCast Team",
+    "url": "https://github.com/borjasalguero/foxcast"
+  },
+  "permissions": {
+    "desktop-notification":{
+      "description": "Allow FoxCast to launch notifications to the tray"
+    },
+    "push": {
+      "description": "Allow FoxCast to receive push notifications for playing media"
+    },
+    "systemXHR": {
+      "description": "Allow FoxCast to make requests to external services as FoxCast server"
+    },
+    "browser": {
+      "description": "Allow FoxCast to embed the player of vimeo or youtube"
+    },
+    "video-capture": {
+      "description": "Share with FoxCast the video stream captured through the camera(s)"
+    }
+  },
+  "messages": [
+     { "push": "/index.html" },
+     { "notification": "/index.html" }
+  ],
+  "locales": {
+    "en-US": {
+      "name": "RemoteTV",
+      "description": "Dongle App"
+    },
+    "es": {
+      "name": "RemoteTV",
+      "description": "Dongle App"
+    }
+  },
+  "activities": {
+   "share": {
+      "filters": {
+        "type": "url"
+      },
+      "href": "index.html",
+      "disposition": "inline",
+      "returnValue": true
+    }
+  },
+  "default_locale": "en-US",
+  "icons": {
+    "128": "/style/icons/128.png",
+    "512": "/style/icons/512.png"
+  },
+  "version": "1"
+}

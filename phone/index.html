@@ -1,0 +1,93 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Connected TV</title>
+    <script src="https://static.opentok.com/v2/js/opentok.min.js"></script>
+    <!--Import Google Icon Font-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
+          
+
+    <script defer type="text/javascript" src="libs/tokbox.js"></script>
+    <script defer type="text/javascript" src="libs/simple_push_helper.js"></script>
+    <script defer type="text/javascript" src="libs/async_storage.js"></script>
+    <script defer type="text/javascript" src="libs/endpoint_manager.js"></script>
+    <script defer type="text/javascript" src="libs/connected_tv.js"></script>
+    <script defer type="text/javascript" src="js/test.js"></script>
+    <link rel="stylesheet" type="text/css" href="style/app.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  </head>
+  <body>
+    <section id="call-panel" class="panel ">
+      <div class="video-name">Borja Salguero</div>
+      <div class="video-status animate">Connecting...</div>
+      <div class="video-fullscreen connecting">
+        <div id="video-opentok-fs"></div>
+      </div>
+      <div class="video-mini">
+        <div id="video-opentok"></div>
+      </div>
+      <button id="hangup"></button>
+    </section>
+    <section id="calllog-panel" class="panel current">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="style/img/abuelos.jpg">
+        </div>
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4">Abuelos</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="http://www.modabookmagazine.com/wp-content/uploads/2014/10/mujer-sonriendo.jpeg">
+        </div>
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4">Elisabeth Svensson</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="style/img/otro.jpg">
+        </div>
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4">Raul González</span>
+        </div>
+      </div>
+      <div class="card" id="make-call">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="style/img/yo.jpg">
+        </div>
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4">Borja Salguero [ES]</span>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light">
+          <img class="activator" src="style/img/padres.jpg">
+        </div>
+        <div class="card-content">
+          <span class="card-title grey-text text-darken-4">Robert McFersson family</span>
+        </div>
+      </div>
+      
+    </section>
+    <section class="panel">
+      <button id="cancel-share"></button>
+      <button id="delete-button"></button>
+      <h1 class="brand">Fox<span>Cast</span></h1>
+      <p id="messages-dongle" loading></p>
+    </section>
+    
+  </body>
+</html>
